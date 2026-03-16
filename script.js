@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/PEGAR_AQUI_TU_URL_PUBLICA/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxHdkXe5DQAeXDriFIN8xvotSMaPNgeLJ_-PmEzsLx00iRylc6fMdaJFy-R8jCUHuxNHA/exec";
 
 const body = document.body;
 const themeToggle = document.getElementById("themeToggle");
@@ -47,11 +47,7 @@ const competitionInfo = {
 };
 
 function applyTheme(theme) {
-  if (theme === "dark") {
-    body.classList.add("dark-theme");
-  } else {
-    body.classList.remove("dark-theme");
-  }
+  body.classList.toggle("dark-theme", theme === "dark");
   localStorage.setItem(THEME_KEY, theme);
 }
 
@@ -61,15 +57,14 @@ function initTheme() {
     applyTheme(savedTheme);
     return;
   }
-
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   applyTheme(prefersDark ? "dark" : "light");
 }
 
-themeToggle.addEventListener("click", () => {
+function toggleTheme() {
   const nextTheme = body.classList.contains("dark-theme") ? "light" : "dark";
   applyTheme(nextTheme);
-});
+}
 
 async function toggleFullscreen() {
   try {
@@ -89,30 +84,35 @@ function syncFullscreenIcons() {
   fullscreenExitIcon.classList.toggle("hidden", !isFullscreen);
 }
 
-fullscreenToggle.addEventListener("click", toggleFullscreen);
-document.addEventListener("fullscreenchange", syncFullscreenIcons);
-
 function getSelectedCompetitions() {
-  const checked = form.querySelectorAll('input[name="competition"]:checked');
-  return Array.from(checked).map((item) => item.value);
+  return Array.from(form.querySelectorAll('input[name="competition"]:checked')).map((item) => item.value);
 }
 
 function showMessage(text, type = "") {
   messageBox.textContent = text;
   messageBox.className = "form-message";
-  if (type) {
-    messageBox.classList.add(type);
-  }
+  if (type) messageBox.classList.add(type);
 }
 
 function validateFormData(data) {
-  if (data.competitions.length === 0) {
-    showMessage("Seleccioná al menos una competición.", "error");
+  if (!data.fullName) {
+    showMessage("Ingresá nombre y apellido.", "error");
     return false;
   }
 
-  if (Number(data.forecastGrade) < 1 || Number(data.forecastGrade) > 10) {
-    showMessage("La nota pronóstico debe estar entre 1 y 10.", "error");
+  const age = Number(data.age);
+  if (!Number.isInteger(age) || age < 10 || age > 25) {
+    showMessage("Ingresá una edad válida entre 10 y 25.", "error");
+    return false;
+  }
+
+  if (!data.course || !data.division) {
+    showMessage("Seleccioná curso y división.", "error");
+    return false;
+  }
+
+  if (data.competitions.length === 0) {
+    showMessage("Seleccioná al menos una competición.", "error");
     return false;
   }
 
@@ -126,7 +126,6 @@ function openCompetitionModal(key) {
   modalTitle.textContent = item.title;
   modalDescription.textContent = item.description;
   modalVideo.src = item.videoUrl;
-
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
   body.classList.add("modal-open");
@@ -139,28 +138,7 @@ function closeCompetitionModal() {
   body.classList.remove("modal-open");
 }
 
-infoButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    openCompetitionModal(button.dataset.competition);
-  });
-});
-
-modalClose.addEventListener("click", closeCompetitionModal);
-modal.addEventListener("click", (event) => {
-  if (event.target.dataset.closeModal === "true") {
-    closeCompetitionModal();
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && modal.classList.contains("is-open")) {
-    closeCompetitionModal();
-  }
-});
-
-form.addEventListener("submit", async (event) => {
+async function handleSubmit(event) {
   event.preventDefault();
 
   const payload = {
@@ -168,14 +146,11 @@ form.addEventListener("submit", async (event) => {
     age: document.getElementById("age").value.trim(),
     course: document.getElementById("course").value,
     division: document.getElementById("division").value,
-    forecastGrade: document.getElementById("forecastGrade").value.trim(),
     competitions: getSelectedCompetitions(),
     createdAt: new Date().toISOString()
   };
 
-  if (!validateFormData(payload)) {
-    return;
-  }
+  if (!validateFormData(payload)) return;
 
   if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("PEGAR_AQUI")) {
     showMessage("Configurá la URL pública de Google Apps Script en script.js antes de enviar.", "error");
@@ -196,11 +171,11 @@ form.addEventListener("submit", async (event) => {
     });
 
     const text = await response.text();
-    let result = {};
+    let result;
 
     try {
       result = JSON.parse(text);
-    } catch (parseError) {
+    } catch {
       throw new Error("La respuesta del servidor no es JSON válido.");
     }
 
@@ -217,7 +192,32 @@ form.addEventListener("submit", async (event) => {
     submitButton.disabled = false;
     submitButton.textContent = "Enviar inscripción";
   }
+}
+
+themeToggle.addEventListener("click", toggleTheme);
+fullscreenToggle.addEventListener("click", toggleFullscreen);
+document.addEventListener("fullscreenchange", syncFullscreenIcons);
+
+infoButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    openCompetitionModal(button.dataset.competition);
+  });
 });
+
+modalClose.addEventListener("click", closeCompetitionModal);
+modal.addEventListener("click", (event) => {
+  if (event.target.dataset.closeModal === "true") closeCompetitionModal();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && modal.classList.contains("is-open")) {
+    closeCompetitionModal();
+  }
+});
+
+form.addEventListener("submit", handleSubmit);
 
 initTheme();
 syncFullscreenIcons();

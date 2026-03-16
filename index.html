@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inscripción | Instituto San Miguel</title>
+  <meta name="description" content="Convocatoria 2026 del Club de Robótica e IA del Instituto San Miguel. Inscripción para participar en equipos preseleccionados y competencias tecnológicas.">
   <link rel="shortcut icon" href="https://i.ibb.co/zVLJxV3p/logo-Coordinacion-Robotica.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,16 +100,16 @@
           <p>Completá tus datos y elegí en qué competencias te gustaría participar.</p>
         </div>
 
-        <form id="inscriptionForm" class="inscription-form">
+        <form id="inscriptionForm" class="inscription-form" novalidate>
           <div class="grid two-cols">
             <div class="field">
               <label for="fullName">Nombre y apellido</label>
-              <input type="text" id="fullName" name="fullName" placeholder="Ej.: Juan Pérez" required />
+              <input type="text" id="fullName" name="fullName" placeholder="Ej.: Juan Pérez" autocomplete="name" required />
             </div>
 
             <div class="field">
               <label for="age">Edad</label>
-              <input type="number" id="age" name="age" min="10" max="25" placeholder="Ej.: 16" required />
+              <input type="number" id="age" name="age" min="10" max="25" placeholder="Ej.: 16" inputmode="numeric" required />
             </div>
           </div>
 
@@ -135,11 +136,6 @@
                 <option value="C">C</option>
               </select>
             </div>
-          </div>
-
-          <div class="field">
-            <label for="forecastGrade">Nota pronóstico en Tecnología o Informática</label>
-            <input type="number" id="forecastGrade" name="forecastGrade" min="1" max="10" step="1" placeholder="Del 1 al 10" required />
           </div>
 
           <fieldset class="fieldset">
@@ -291,6 +287,7 @@
             title="Video de competencia"
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen>
           </iframe>
         </div>
