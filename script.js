@@ -27,7 +27,7 @@ const competitionInfo = {
   "velocista": {
     title: "Velocista",
     description: "En Velocista, el robot debe recorrer una pista en el menor tiempo posible manteniendo precisión y estabilidad. Se trabaja mucho con control de movimiento, velocidad, calibración, sensores y optimización del recorrido.",
-    videoUrl: "https://www.youtube.com/embed/REEMPLAZAR_ID_VIDEO_VELOCISTA"
+    videoUrl: "https://roboticaism.electronicagambino.com/videos/Video_Explicativo_Robot_Velocista.mp4"
   },
   "laberinto": {
     title: "Laberinto",
