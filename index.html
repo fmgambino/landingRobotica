@@ -15,17 +15,15 @@
 
   <header class="site-header">
     <div class="container header-content">
-<div class="brand">
-  <div class="brand-logo">
-    <img src="https://i.ibb.co/zVLJxV3p/logo-Coordinacion-Robotica.png" 
-         alt="Logo Club de Robótica e IA">
-  </div>
-
-  <div class="brand-text">
-    <span class="brand-title">Instituto San Miguel</span>
-    <span class="brand-subtitle">Club de Robótica e IA · Convocatoria 2026</span>
-  </div>
-</div>
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="https://i.ibb.co/zVLJxV3p/logo-Coordinacion-Robotica.png" alt="Logo Club de Robótica e IA">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Instituto San Miguel</span>
+          <span class="brand-subtitle">Club de Robótica e IA · Convocatoria 2026</span>
+        </div>
+      </div>
 
       <div class="header-actions">
         <button id="themeToggle" class="toggle-theme" type="button" aria-label="Cambiar tema" title="Cambiar tema">
@@ -98,9 +96,7 @@
       <section class="form-card">
         <div class="card-header">
           <h2>Postulate ahora</h2>
-          <p>
-            Completá tus datos y elegí en qué competencias te gustaría participar.
-          </p>
+          <p>Completá tus datos y elegí en qué competencias te gustaría participar.</p>
         </div>
 
         <form id="inscriptionForm" class="inscription-form">
@@ -150,24 +146,88 @@
             <legend>Tipo de competición a participar</legend>
             <div class="checkbox-grid">
               <label class="check-card">
-                <input type="checkbox" name="competition" value="Mini Sumo" />
-                <span>Mini Sumo</span>
+                <div class="check-card-top">
+                  <div class="check-main">
+                    <input type="checkbox" name="competition" value="Mini Sumo" />
+                    <span>Mini Sumo</span>
+                  </div>
+                  <button type="button" class="info-button" data-competition="mini-sumo" aria-label="Más información sobre Mini Sumo" title="Más información">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                      <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="12" cy="7" r="1.2" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
+                <small>Combate entre robots autónomos dentro de un dohyo.</small>
               </label>
+
               <label class="check-card">
-                <input type="checkbox" name="competition" value="Velocista" />
-                <span>Velocista</span>
+                <div class="check-card-top">
+                  <div class="check-main">
+                    <input type="checkbox" name="competition" value="Velocista" />
+                    <span>Velocista</span>
+                  </div>
+                  <button type="button" class="info-button" data-competition="velocista" aria-label="Más información sobre Velocista" title="Más información">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                      <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="12" cy="7" r="1.2" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
+                <small>Prueba de rapidez, precisión y control del robot.</small>
               </label>
+
               <label class="check-card">
-                <input type="checkbox" name="competition" value="Laberinto" />
-                <span>Laberinto</span>
+                <div class="check-card-top">
+                  <div class="check-main">
+                    <input type="checkbox" name="competition" value="Laberinto" />
+                    <span>Laberinto</span>
+                  </div>
+                  <button type="button" class="info-button" data-competition="laberinto" aria-label="Más información sobre Laberinto" title="Más información">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                      <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="12" cy="7" r="1.2" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
+                <small>Navegación inteligente para encontrar la salida.</small>
               </label>
+
               <label class="check-card">
-                <input type="checkbox" name="competition" value="Futbot" />
-                <span>Futbot</span>
+                <div class="check-card-top">
+                  <div class="check-main">
+                    <input type="checkbox" name="competition" value="Futbot" />
+                    <span>Futbot</span>
+                  </div>
+                  <button type="button" class="info-button" data-competition="futbot" aria-label="Más información sobre Futbot" title="Más información">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                      <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="12" cy="7" r="1.2" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
+                <small>Desafío dinámico de estrategia, movimiento y control.</small>
               </label>
+
               <label class="check-card">
-                <input type="checkbox" name="competition" value="IA" />
-                <span>IA</span>
+                <div class="check-card-top">
+                  <div class="check-main">
+                    <input type="checkbox" name="competition" value="IA" />
+                    <span>IA</span>
+                  </div>
+                  <button type="button" class="info-button" data-competition="ia" aria-label="Más información sobre IA" title="Más información">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                      <path d="M12 10v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="12" cy="7" r="1.2" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
+                <small>Creatividad aplicada a datos, automatización y algoritmos.</small>
               </label>
             </div>
           </fieldset>
@@ -209,6 +269,38 @@
       </nav>
     </div>
   </footer>
+
+  <div id="competitionModal" class="modal" aria-hidden="true">
+    <div class="modal-overlay" data-close-modal="true"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button id="modalClose" class="modal-close" type="button" aria-label="Cerrar ventana">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div class="modal-content">
+        <span class="modal-badge">Información de competencia</span>
+        <h3 id="modalTitle">Título</h3>
+        <p id="modalDescription">Descripción</p>
+
+        <div class="video-wrapper">
+          <iframe
+            id="modalVideo"
+            src=""
+            title="Video de competencia"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <p class="video-note">
+          Reemplazá la URL del iframe en <strong>script.js</strong> por el video de YouTube que quieras mostrar.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

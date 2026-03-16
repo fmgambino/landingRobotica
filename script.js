@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = "https://script.google.com/a/macros/institutosanmiguel.edu.ar/s/AKfycbxHdkXe5DQAeXDriFIN8xvotSMaPNgeLJ_-PmEzsLx00iRylc6fMdaJFy-R8jCUHuxNHA/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/PEGAR_AQUI_TU_URL_PUBLICA/exec";
 
 const body = document.body;
 const themeToggle = document.getElementById("themeToggle");
@@ -9,7 +9,42 @@ const form = document.getElementById("inscriptionForm");
 const messageBox = document.getElementById("formMessage");
 const submitButton = form.querySelector('button[type="submit"]');
 
+const modal = document.getElementById("competitionModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
+const modalVideo = document.getElementById("modalVideo");
+const modalClose = document.getElementById("modalClose");
+const infoButtons = document.querySelectorAll(".info-button");
+
 const THEME_KEY = "ism-theme";
+
+const competitionInfo = {
+  "mini-sumo": {
+    title: "Mini Sumo",
+    description: "En Mini Sumo, dos robots autónomos se enfrentan dentro de un área circular llamada dohyo. El objetivo es detectar al oponente, empujarlo y sacarlo de la pista sin salir uno mismo. Esta competencia desarrolla estrategia, sensores, programación y diseño mecánico.",
+    videoUrl: "https://www.youtube.com/embed/REEMPLAZAR_ID_VIDEO_MINI_SUMO"
+  },
+  "velocista": {
+    title: "Velocista",
+    description: "En Velocista, el robot debe recorrer una pista en el menor tiempo posible manteniendo precisión y estabilidad. Se trabaja mucho con control de movimiento, velocidad, calibración, sensores y optimización del recorrido.",
+    videoUrl: "https://www.youtube.com/embed/REEMPLAZAR_ID_VIDEO_VELOCISTA"
+  },
+  "laberinto": {
+    title: "Laberinto",
+    description: "En Laberinto, el desafío consiste en diseñar y programar un robot capaz de orientarse y encontrar la salida de un recorrido con obstáculos o pasillos. Se ponen en juego la lógica, la navegación autónoma y la toma de decisiones.",
+    videoUrl: "https://www.youtube.com/embed/REEMPLAZAR_ID_VIDEO_LABERINTO"
+  },
+  "futbot": {
+    title: "Futbot",
+    description: "Futbot propone una experiencia dinámica donde el robot debe desplazarse, controlar el movimiento y responder estratégicamente dentro de una prueba inspirada en el fútbol robótico. Favorece la coordinación, la rapidez de respuesta y el trabajo en equipo.",
+    videoUrl: "https://www.youtube.com/embed/REEMPLAZAR_ID_VIDEO_FUTBOT"
+  },
+  "ia": {
+    title: "Inteligencia Artificial",
+    description: "La categoría IA invita a explorar ideas vinculadas con automatización, visión, análisis de datos, algoritmos inteligentes y soluciones creativas. Es una propuesta ideal para quienes quieren combinar programación, innovación y pensamiento computacional.",
+    videoUrl: "https://www.youtube.com/embed/REEMPLAZAR_ID_VIDEO_IA"
+  }
+};
 
 function applyTheme(theme) {
   if (theme === "dark") {
@@ -84,6 +119,47 @@ function validateFormData(data) {
   return true;
 }
 
+function openCompetitionModal(key) {
+  const item = competitionInfo[key];
+  if (!item) return;
+
+  modalTitle.textContent = item.title;
+  modalDescription.textContent = item.description;
+  modalVideo.src = item.videoUrl;
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  body.classList.add("modal-open");
+}
+
+function closeCompetitionModal() {
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  modalVideo.src = "";
+  body.classList.remove("modal-open");
+}
+
+infoButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    openCompetitionModal(button.dataset.competition);
+  });
+});
+
+modalClose.addEventListener("click", closeCompetitionModal);
+modal.addEventListener("click", (event) => {
+  if (event.target.dataset.closeModal === "true") {
+    closeCompetitionModal();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && modal.classList.contains("is-open")) {
+    closeCompetitionModal();
+  }
+});
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -102,7 +178,7 @@ form.addEventListener("submit", async (event) => {
   }
 
   if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("PEGAR_AQUI")) {
-    showMessage("Configurá la URL de Google Apps Script en script.js antes de enviar.", "error");
+    showMessage("Configurá la URL pública de Google Apps Script en script.js antes de enviar.", "error");
     return;
   }
 
@@ -113,14 +189,20 @@ form.addEventListener("submit", async (event) => {
   try {
     const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: "POST",
-      mode: "cors",
       headers: {
         "Content-Type": "text/plain;charset=utf-8"
       },
       body: JSON.stringify(payload)
     });
 
-    const result = await response.json();
+    const text = await response.text();
+    let result = {};
+
+    try {
+      result = JSON.parse(text);
+    } catch (parseError) {
+      throw new Error("La respuesta del servidor no es JSON válido.");
+    }
 
     if (!response.ok || result.result !== "success") {
       throw new Error(result.message || "No se pudo guardar la inscripción.");
@@ -130,7 +212,7 @@ form.addEventListener("submit", async (event) => {
     form.reset();
   } catch (error) {
     console.error(error);
-    showMessage("Ocurrió un error al enviar los datos. Revisá la URL del Web App y los permisos.", "error");
+    showMessage("Ocurrió un error al enviar los datos. Revisá la URL pública del Web App y los permisos.", "error");
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = "Enviar inscripción";
