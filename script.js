@@ -22,7 +22,7 @@ const competitionInfo = {
   "mini-sumo": {
     title: "Mini Sumo",
     description: "En Mini Sumo, dos robots autónomos se enfrentan dentro de un área circular llamada dohyo. El objetivo es detectar al oponente, empujarlo y sacarlo de la pista sin salir uno mismo. Esta competencia desarrolla estrategia, sensores, programación y diseño mecánico.",
-    videoUrl: "https://www.youtube.com/embed/REEMPLAZAR_ID_VIDEO_MINI_SUMO"
+    videoUrl: "https://roboticaism.electronicagambino.com/videos/Video_Explicativo_Mini_Sumo_Rob%C3%B3tica.mp4"
   },
   "velocista": {
     title: "Velocista",
