@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscripción | Instituto San Miguel</title>
+  <link rel="shortcut icon" href="https://i.ibb.co/zVLJxV3p/logo-Coordinacion-Robotica.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-bg"></div>
+
+  <header class="site-header">
+    <div class="container header-content">
+<div class="brand">
+  <div class="brand-logo">
+    <img src="https://i.ibb.co/zVLJxV3p/logo-Coordinacion-Robotica.png" 
+         alt="Logo Club de Robótica e IA">
+  </div>
+
+  <div class="brand-text">
+    <span class="brand-title">Instituto San Miguel</span>
+    <span class="brand-subtitle">Club de Robótica e IA · Convocatoria 2026</span>
+  </div>
+</div>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="toggle-theme" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+          <span class="toggle-track">
+            <span class="toggle-icon toggle-sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 2.5V5M12 19V21.5M21.5 12H19M5 12H2.5M18.72 5.28L17 7M7 17l-1.72 1.72M18.72 18.72L17 17M7 7 5.28 5.28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="toggle-icon toggle-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M19.5 15.5A8 8 0 1 1 8.5 4.5a6.6 6.6 0 1 0 11 11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="toggle-thumb"></span>
+          </span>
+        </button>
+
+        <button id="fullscreenToggle" class="icon-button" type="button" aria-label="Pantalla completa" title="Pantalla completa">
+          <svg id="fullscreenEnterIcon" viewBox="0 0 24 24" fill="none">
+            <path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg id="fullscreenExitIcon" viewBox="0 0 24 24" fill="none" class="hidden">
+            <path d="M9 3H3v6M15 3h6v6M21 15v6h-6M3 15v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 8 3 3M16 8l5-5M8 16l-5 5M16 16l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="hero-section">
+    <div class="container hero-grid">
+      <section class="hero-copy">
+        <span class="badge">Convocatoria abierta 2026</span>
+        <h1>Sumate al desafío y formá parte de los equipos preseleccionados del Club de Robótica e IA</h1>
+        <p>
+          Invitamos a chicos y jóvenes del Instituto San Miguel a participar en esta convocatoria especial
+          para descubrir talento, compromiso, creatividad y pasión por la tecnología. Los estudiantes que se
+          destaquen podrán integrar los equipos preseleccionados que representarán al instituto en actividades,
+          entrenamientos y futuras competencias de robótica e inteligencia artificial.
+        </p>
+
+        <div class="invitation-block">
+          <h2>¿Por qué participar?</h2>
+          <p>
+            Porque vas a poder aprender, experimentar, construir, programar y trabajar en equipo en proyectos
+            reales vinculados con robótica, automatización, informática e IA. Esta inscripción es el primer paso
+            para demostrar tu interés y tu potencial.
+          </p>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature-card">
+            <strong>Aprendizaje y entrenamiento</strong>
+            <span>Espacios para desarrollar habilidades técnicas y creativas.</span>
+          </div>
+          <div class="feature-card">
+            <strong>Preselección de equipos</strong>
+            <span>Oportunidad de integrar grupos que representen al instituto.</span>
+          </div>
+          <div class="feature-card">
+            <strong>Robótica e Inteligencia Artificial</strong>
+            <span>Desafíos para pensar, diseñar, construir y programar.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <div class="card-header">
+          <h2>Postulate ahora</h2>
+          <p>
+            Completá tus datos y elegí en qué competencias te gustaría participar.
+          </p>
+        </div>
+
+        <form id="inscriptionForm" class="inscription-form">
+          <div class="grid two-cols">
+            <div class="field">
+              <label for="fullName">Nombre y apellido</label>
+              <input type="text" id="fullName" name="fullName" placeholder="Ej.: Juan Pérez" required />
+            </div>
+
+            <div class="field">
+              <label for="age">Edad</label>
+              <input type="number" id="age" name="age" min="10" max="25" placeholder="Ej.: 16" required />
+            </div>
+          </div>
+
+          <div class="grid two-cols">
+            <div class="field">
+              <label for="course">Curso</label>
+              <select id="course" name="course" required>
+                <option value="">Seleccionar</option>
+                <option value="1">1°</option>
+                <option value="2">2°</option>
+                <option value="3">3°</option>
+                <option value="4">4°</option>
+                <option value="5">5°</option>
+                <option value="6">6°</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="division">División</label>
+              <select id="division" name="division" required>
+                <option value="">Seleccionar</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="forecastGrade">Nota pronóstico en Tecnología o Informática</label>
+            <input type="number" id="forecastGrade" name="forecastGrade" min="1" max="10" step="1" placeholder="Del 1 al 10" required />
+          </div>
+
+          <fieldset class="fieldset">
+            <legend>Tipo de competición a participar</legend>
+            <div class="checkbox-grid">
+              <label class="check-card">
+                <input type="checkbox" name="competition" value="Mini Sumo" />
+                <span>Mini Sumo</span>
+              </label>
+              <label class="check-card">
+                <input type="checkbox" name="competition" value="Velocista" />
+                <span>Velocista</span>
+              </label>
+              <label class="check-card">
+                <input type="checkbox" name="competition" value="Laberinto" />
+                <span>Laberinto</span>
+              </label>
+              <label class="check-card">
+                <input type="checkbox" name="competition" value="Futbot" />
+                <span>Futbot</span>
+              </label>
+              <label class="check-card">
+                <input type="checkbox" name="competition" value="IA" />
+                <span>IA</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button class="submit-button" type="submit">Enviar inscripción</button>
+            <button class="secondary-button" type="reset">Limpiar</button>
+          </div>
+
+          <p class="helper-text">
+            Tu inscripción será evaluada para futuras instancias de entrenamiento y preselección.
+          </p>
+
+          <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p><strong>INSTITUTO SAN MIGUEL © 2026</strong></p>
+      <p>by Ing. Prof. Fernando Gambino · Todos los Derechos Reservados.</p>
+      <p>
+        Diseño y Desarrollo by
+        <a href="https://electronicagambino.com" target="_blank" rel="noopener noreferrer">Electrónica Gambino</a>
+      </p>
+
+      <nav class="footer-links" aria-label="Enlaces legales">
+        <a href="#">Aviso Legal</a>
+        <span>|</span>
+        <a href="#">Política de Cookies</a>
+        <span>|</span>
+        <a href="#">Política de Privacidad</a>
+        <span>|</span>
+        <a href="#">Política de Venta</a>
+        <span>|</span>
+        <a href="#">Términos y Condiciones</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
